@@ -7,7 +7,7 @@ const autoprefixer = require('autoprefixer');
 const ROOT_DIR = path.resolve(__dirname, '../');
 
 module.exports = {
-  entry: path.resolve(ROOT_DIR, 'src/index.js'),
+  entry: path.resolve(ROOT_DIR, 'src/index.tsx'),
   output: {
     filename: 'bundle.js',
     path: path.resolve(ROOT_DIR, 'build'),
@@ -15,7 +15,7 @@ module.exports = {
   },
   mode: 'development',
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     alias: {
       Config: path.resolve(ROOT_DIR, 'config/'),
       Src: path.resolve(ROOT_DIR, 'src')
@@ -48,6 +48,19 @@ module.exports = {
             cacheDirectory: true
           }
         }
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: path.resolve(ROOT_DIR, 'node_modules'),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true
+            }
+          },
+          'ts-loader'
+        ]
       },
       {
         test: /\.css$/,
