@@ -49,6 +49,8 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
+    "@material-ui/core": "^1.5.1",
+    "@material-ui/icons": "^2.0.3",
     "@types/history": "^4.7.0",
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
@@ -134,6 +136,7 @@
       ],
       "react/jsx-uses-react": "error",
       "react/jsx-uses-vars": "error",
+      "no-undef": 0,
       "react/jsx-one-expression-per-line": 0,
       "jsx-a11y/anchor-is-valid": [
         "error",
