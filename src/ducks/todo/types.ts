@@ -8,3 +8,8 @@ export type AddTodo = {
   value: string,
   id: string
 };
+
+export type DeleteTodo = {
+  type: string,
+  id: string
+};

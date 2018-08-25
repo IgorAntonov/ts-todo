@@ -1,3 +1,4 @@
 export { reducer } from './reducer';
 export { actions } from './actions';
-export { addTodo } from './thunks';
+export { addTodo, deleteTodo } from './thunks';
+export * from './selectors';

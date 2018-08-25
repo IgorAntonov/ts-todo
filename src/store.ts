@@ -3,17 +3,23 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import { rootReducer } from './ducks';
+import { loadTodos } from './local-storage';
 
 const logger = createLogger({ collapsed: true });
 const middlewares = [thunkMiddleware, logger];
 
+const initialState: StoreState = {
+  todos: loadTodos()
+};
+
 export const store = createStore(
   rootReducer,
+  initialState,
   applyMiddleware(...middlewares)
 );
 
-type Todo = {
-  id: number,
+export type Todo = {
+  id: string,
   value: string,
   isDone: boolean
 };

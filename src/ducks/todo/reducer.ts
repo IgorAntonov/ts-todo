@@ -15,6 +15,8 @@ export const reducer = (state = initialState, action: Action) => {
           isDone: false
         }
       ];
+    case types.delete:
+      return state.filter(todo => todo.id !== action.id);
     default:
       return state;
   }

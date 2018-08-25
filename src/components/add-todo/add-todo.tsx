@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 const styles = createStyles({
   root: {
     display: 'flex',
-    paddingLeft: 10
+    paddingLeft: 10,
+    marginBottom: 10
   },
   textField: {
     flexGrow: 1
@@ -18,9 +19,12 @@ const styles = createStyles({
 interface Props extends WithStyles<typeof styles> {
   addTodo: (value: string) => void
 }
+interface State {
+  value: string
+}
 
 export const AddTodo = withStyles(styles)<Props>(
-  class Add extends React.Component<Props> {
+  class Add extends React.Component<Props, State> {
     state = { value: '' }
 
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
@@ -36,8 +40,10 @@ export const AddTodo = withStyles(styles)<Props>(
     submitValue = () => {
       const { addTodo } = this.props;
       const { value } = this.state;
-      addTodo(value);
-      this.setState({ value: '' });
+      if (value.length > 0) {
+        addTodo(value);
+        this.setState({ value: '' });
+      }
     }
 
     render() {
