@@ -15,15 +15,48 @@ const styles = createStyles({
   }
 });
 
-export interface Props extends WithStyles<typeof styles> {
-  foo?: string
+interface Props extends WithStyles<typeof styles> {
+  addTodo: (value: string) => void
 }
 
-export const AddTodo = withStyles(styles)<Props>(({ classes }) => (
-  <Paper className={classes.root}>
-    <TextField className={classes.textField} />
-    <Button>
-      ADD
-    </Button>
-  </Paper>
-));
+export const AddTodo = withStyles(styles)<Props>(
+  class Add extends React.Component<Props> {
+    state = { value: '' }
+
+    handleChange = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
+      value: e.target.value
+    });
+
+    handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.which === 13) {
+        this.submitValue();
+      }
+    }
+
+    submitValue = () => {
+      const { addTodo } = this.props;
+      const { value } = this.state;
+      addTodo(value);
+      this.setState({ value: '' });
+    }
+
+    render() {
+      const { classes } = this.props;
+      const { value } = this.state;
+      return (
+        <Paper className={classes.root}>
+          <TextField
+            value={value}
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyPress}
+            className={classes.textField}
+            autoFocus
+          />
+          <Button onClick={this.submitValue}>
+            ADD
+          </Button>
+        </Paper>
+      );
+    }
+  }
+);

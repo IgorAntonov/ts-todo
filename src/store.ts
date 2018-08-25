@@ -11,3 +11,13 @@ export const store = createStore(
   rootReducer,
   applyMiddleware(...middlewares)
 );
+
+type Todo = {
+  id: number,
+  value: string,
+  isDone: boolean
+};
+
+export interface StoreState {
+  todos: Todo[]
+}

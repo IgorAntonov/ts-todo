@@ -1,1 +1,1 @@
-export { AddTodo } from './add-todo';
+export { container as AddTodo } from './container';
